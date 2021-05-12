@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="crm_add_form_inherit" model="ir.ui.view">
+            <field name="name">crm_add.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+            <field name="arch" type="xml">
+
+                <field name="phone" position="before">
+                    <field name = "telefono_negocio" />
+                    <field name = "celular_negocio" />
+                    <field name = "website" />
+                    <!-- <field name = "email_negocio" /> -->
+                    <field name = "antiguedad" readonly="1"  force_save="1"/>
+                    <!-- <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "numero_id" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "3" data-inputmask-greedy = "false" name = "edad" /> -->
+                </field>
+
+                <field name="user_id" position="after">
+                    <field name = "gestor"/>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="string">Oficial Comercial</attribute>
+                </field>
+
+                <field name="state_id" position="attributes">
+                    <attribute name="attrs">{'invisible': 1}</attribute>
+                </field>
+
+                <field name="state_id" position="after">
+                    <field name="list_deptos" class="o_address_state" placeholder="Departamento" options='{"no_open": True}'/>
+                </field>
+
+                <xpath expr="//group/group[2]/field[@name='phone']" position="replace">
+                </xpath> 
+                <xpath expr="//group/group[2]/field[@name='mobile']" position="replace">
+                </xpath> 
+                <xpath expr="//group/group[2]/field[@name='function']" position="replace">
+                </xpath> 
+                <xpath expr="//group/group[2]/div[1]/field[@name='title']" position="replace">
+                </xpath>
+                <xpath expr="//group/group[1]/field[@name='website']" position="replace">
+                </xpath>  
+                <xpath expr="//group/group[1]/div[@class='o_address_format']" position="after">
+                    <field name = "tipo_terri"/>
+                </xpath>
+                <!-- <xpath expr="//group/group[2]/div[1]/field[@name='title']" position="replace">
+                </xpath> -->
+                
+                <!-- <field name="website" position="before">
+                    <field name = "tipo_terri"/> -->
+                    <!-- <field name = "longitud" />
+                    <field name = "latitud" /> -->
+                    <!-- <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "cantidad_productos" /> -->
+                    <!-- <field name = "tipo_chip_selec" />
+                    <field name = "metodos_pago" /> -->
+                <!-- </field> -->
+                
+                <!-- <field name="team_id" position="after">                            
+                    <field name = "email_dueno" />
+                </field> -->
+
+                <!-- Nuevos campos -->
+                <xpath expr="//group/group[2]" position="after">
+                    <!-- <group name="main"> -->
+                    <!-- <newline /> -->
+                    <group string="Información General del Cliente">
+                        <field name = "tipo_cliente"/>
+                        <field name="no_cliente"/>
+                        <field name="date_open"/>
+                        <field name = "deno_razon_social"/>
+                        <field name="rtn_cliente" />
+                        <field name="fecha_constitucion" />
+                        <field name = "permiso_operacion" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name="pregunta_grupo_financiero" />
+                        <field name="respuesta_grupo_financiero" />
+                        <field name = "numero_sucursale" />
+                        <field name = "tipo_giro_id" />
+                        <field name="otras_actividades" />
+                        <field name="fecha_registro" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name = "cant_empleados"/>
+                        <field name = "numero_transacciones"/>
+                        <field name="pos_disponible"/>
+                        <field name="pos_banco"/>
+                    </group>
+
+                    <group string="&#160;">
+                        <field name = "tiene_internet"/>
+                        <field name = "tipo_proveedor_inter_id" />
+                        <field name="ancho_banda"/>
+                        <field name = "tipo_internet" options='{"no_open": True}'/>
+                        <field name = "tipo_proveedor_inter_mejor" />
+                    </group>
+
+                    <group string="Datos Financieros del Cliente ">
+                        <field name = "valor_mensual" />
+                        <field name = "monto_total_activos"/>
+                        
+                    </group>
+                    
+                    <group string="&#160;">
+                        <field name = "monto_venta_anual" />
+                    </group>
+
+                    <group string="Principales Clientes">
+                        <field name = "cliente_1" />
+                        <field name = "cliente_2"/>
+                        <field name = "cliente_3" />
+                    </group>
+
+                    <group string="Principales Proveedores">
+                        <label for="proveedor_1"/>
+                        <div class="o_row">
+                            <field name="proveedor_1"/>
+                            <field name="proveedor_tel_1" placeholder="Telefono" domain="[]" options='{"no_open": True}'/>
+                        </div>
+                        <label for="proveedor_2"/>
+                        <div class="o_row">
+                            <field name="proveedor_2"/>
+                            <field name="proveedor_tel_2" placeholder="Telefono" domain="[]" options='{"no_open": True}'/>
+                        </div>
+                        <label for="proveedor_3"/>
+                        <div class="o_row">
+                            <field name="proveedor_3"/>
+                            <field name="proveedor_tel_3" placeholder="Telefono" domain="[]" options='{"no_open": True}'/>
+                        </div>
+                    </group>
+                    <!-- <newline /> -->
+                    
+                    <group string=" Información General del Representante Legal ó Propietario">
+                        <field name = "nombre_completo_dueno" />
+                        <field name = "numero_id_dueno" />
+                        <field name = "rtn_de_legal" />
+                        <field name="pasaporte_de_legal"/>
+                        <field name="id_extranjero_de_legal" />
+                        <field name="estado_civil_de_legal" />
+                        <field name = "phone" />
+                        <field name = "mobile" />
+                        <field name="email_de_legal" />
+                        <field name = "sexo_de_legal" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name = "lugar_nacio_de_legal" />
+                        <field name = "fecha_nacio_de_legal" />
+                        <field name="nacionalidad_de_legal"/>
+                        <field name="function"/>
+                        <field name="profesion_de_legal" />
+                        <field name = "cargo_publico" />
+                        <field name = "nombre_cargo" />
+                        <label for="periodo_cargo_desde"/>
+                        <div class="o_row">
+                            <field name="periodo_cargo_desde" placeholder="Desde"/>
+                            <field name="periodo_cargo_hasta" placeholder="Hasta"/>
+                        </div>
+                    </group>
+
+                    <group string="USO EXCLUSIVO SERVICIOS DIGITALES GÜIP, S.A.">
+                        <field name = "aplica_apertura" />
+                        <field name = "numero_cta_banco" />
+                        <field name = "tipo_cuenta" />
+                        <field name= "datos_instalacion"/>
+                        <field name="aplicativo" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name="cantidad_dispositivos" />
+                        <field name = "tipo_dispositivo" />
+                        <field name = "usuarios_dispositivos" />
+                        <field name="solicita_sim"/>
+                        <label for="disp_1_latitud"/>
+                        <div class="o_row">
+                            <field name="disp_1_latitud" placeholder="Latitud"/>
+                            <field name="disp_1_longitud" placeholder="Longitud"/>
+                        </div>
+                        <label for="disp_2_latitud"/>
+                        <div class="o_row">
+                            <field name="disp_2_latitud" placeholder="Latitud"/>
+                            <field name="disp_2_longitud" placeholder="Longitud"/>
+                        </div>
+                    </group>
+                </xpath>
+
+                <notebook>
+                    <page string="Usuarios">
+                        <group colspan="4">
+                            <field name="user_creacion_ids" nolabel="1" string="Usuario">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="user" />
+                                    <field name="tipo_usuario" />
+                                </tree>
+                            </field>  
+                        </group>
+                    </page>
+
+                    <page string="Información de Socios / Accionistas" attrs="{'invisible': [('tipo_cliente', '=', 'Comerciante_Individual')]}">
+                        <field name="sociedad_dilo_ids" nolabel="1">
+                            <tree string="&#160;Socio / Accionista" editable="bottom">
+                                <field name="name"/>
+                                <field name="id_socio"/>
+                                <field name="porcentaje_socio"/>
+                                <field name="nacionalidad_socio"/>
+                            </tree>
+                        </field>  
+                    </page>
+
+                    <page string="Junta Directiva / Consejo de Administración " attrs="{'invisible': [('tipo_cliente', '=', 'Comerciante_Individual')]}">
+                        <field name="sociedad_dilo_junta_ids" nolabel="1">
+                            <tree string="&#160;Miembro Junta Directiva" editable="bottom">
+                                <field name="name"/>
+                                <field name="id_socio"/>
+                                <field name="cargo"/>
+                                <field name="nacionalidad_socio"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Fotografías">
+                        <group colspan="4">
+                            <field name="id_representante" widget="many2many_binary"/>
+                            <field name="urls_images"/>
+                        </group>
+                    </page>
+
+                    
+                </notebook>
+
+            </field>
+        </record>
+
+        <record id="crm_flujo_form_inherit" model="ir.ui.view">
+            <field name="name">flujo.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+
+                <!-- <xpath expr="//group/group[1]/div[@class='o_address_format']" position="after">
+                    <field name = "tipo_terri"/>
+                </xpath>
+                <xpath expr="//group/group[2]/field[@name='function']" position="replace">
+                </xpath> 
+                <xpath expr="//group/group[2]/field[@name='mobile']" position="replace">
+                </xpath>  -->
+
+                <field name="state_id" position="attributes">
+                    <attribute name="attrs">{'invisible': 1}</attribute>
+                </field>
+
+                <field name="phone" position="replace">
+                    <field name = "telefono_negocio" />
+                    <field name = "celular_negocio" />
+                </field>
+
+                <field name="state_id" position="after">
+                    <field name="list_deptos" class="o_address_state" placeholder="Departamento" options='{"no_open": True}'/>
+                </field>
+
+                <field name="user_id" position="after">
+                    <field name = "gestor"/>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="string">Oficial Comercial</attribute>
+                </field>
+
+                <field name="date_deadline" position="after">
+                    <field name = "website" />
+                    <!-- <field name = "email_negocio" /> -->
+                    <field name = "antiguedad" readonly="1"  force_save="1"/>
+                </field>
+
+                <!-- <field name="website" position="after">
+                    <field name = "longitud" />
+                    <field name = "latitud" />
+
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "numero_id" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "3" data-inputmask-greedy = "false" name = "edad" />
+                
+                    <field name = "deno_razon_social" />
+                    <field name = "email_negocio" />
+                    <field name = "telefono_negocio" />
+                     <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "antiguedad" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "cantidad_productos" />
+                    <field name = "valor_mensual" />
+
+                    <field name = "tiene_internet" />
+                    <field name = "tipo_internet" />
+                    <field name = "tipo_chip_selec" />
+                    <field name = "empleados_negocio" />
+                    <field name = "metodos_pago" />
+
+                    <field name = "tipo_cliente" />
+                    <field name = "permiso_operacion" />
+                    <field name = "numero_sucursale" />
+                    <field name = "tipo_giro_id" />
+                    <field name = "tipo_terri" />
+                    <field name = "tipo_proveedor_inter_id" />
+                    <field name = "tipo_proveedor_inter_mejor" />
+                    
+
+                </field>
+
+                <field name="mobile" position="after">
+           
+                    <field name = "nombre_completo_dueno" />
+                    <field name = "numero_id_dueno" />
+                    <field name = "email_dueno" />
+                    <field name = "cargo_publico" />
+                    <field name = "nombre_cargo" />
+                </field>     -->
+
+                <!-- Nuevos campos -->
+                <xpath expr="//notebook/page[2]/group/group[2]" position="after">
+                    <!-- <group name="main"> -->
+                    <!-- <newline /> -->
+                    <group string="Información General del Cliente">
+                        <field name = "tipo_cliente"/>
+                        <field name="no_cliente"/>
+                        <field name="date_open"/>
+                        <field name = "deno_razon_social"/>
+                        <field name="rtn_cliente" />
+                        <field name="fecha_constitucion" />
+                        <field name = "permiso_operacion" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name="pregunta_grupo_financiero" />
+                        <field name="respuesta_grupo_financiero" />
+                        <field name = "numero_sucursale" />
+                        <field name = "tipo_giro_id" />
+                        <field name="otras_actividades" />
+                        <field name="fecha_registro" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name = "cant_empleados"/>
+                        <field name = "numero_transacciones"/>
+                        <field name="pos_disponible"/>
+                        <field name="pos_banco"/>
+                    </group>
+
+                    <group string="&#160;">
+                        <field name = "tiene_internet"/>
+                        <field name = "tipo_proveedor_inter_id" />
+                        <field name="ancho_banda"/>
+                        <field name = "tipo_internet" options='{"no_open": True}'/>
+                        <field name = "tipo_proveedor_inter_mejor" />
+                    </group>
+
+                    <group string="Datos Financieros del Cliente ">
+                        <field name = "valor_mensual" />
+                        <field name = "monto_total_activos"/>
+                        
+                    </group>
+                    
+                    <group string="&#160;">
+                        <field name = "monto_venta_anual" />
+                    </group>
+
+                    <group string="Principales Clientes">
+                        <field name = "cliente_1" />
+                        <field name = "cliente_2"/>
+                        <field name = "cliente_3" />
+                    </group>
+
+                    <group string="Principales Proveedores">
+                        <label for="proveedor_1"/>
+                        <div class="o_row">
+                            <field name="proveedor_1"/>
+                            <field name="proveedor_tel_1" placeholder="Telefono" domain="[]" options='{"no_open": True}'/>
+                        </div>
+                        <label for="proveedor_2"/>
+                        <div class="o_row">
+                            <field name="proveedor_2"/>
+                            <field name="proveedor_tel_2" placeholder="Telefono" domain="[]" options='{"no_open": True}'/>
+                        </div>
+                        <label for="proveedor_3"/>
+                        <div class="o_row">
+                            <field name="proveedor_3"/>
+                            <field name="proveedor_tel_3" placeholder="Telefono" domain="[]" options='{"no_open": True}'/>
+                        </div>
+                    </group>
+                    <!-- <newline /> -->
+                    
+                    <group string=" Información General del Representante Legal ó Propietario">
+                        <field name = "nombre_completo_dueno" />
+                        <field name = "numero_id_dueno" />
+                        <field name = "rtn_de_legal" />
+                        <field name="pasaporte_de_legal"/>
+                        <field name="id_extranjero_de_legal" />
+                        <field name="estado_civil_de_legal" />
+                        <field name = "phone" />
+                        <field name = "mobile" />
+                        <field name="email_de_legal" />
+                        <field name = "sexo_de_legal" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name = "lugar_nacio_de_legal" />
+                        <field name = "fecha_nacio_de_legal" />
+                        <field name="nacionalidad_de_legal"/>
+                        <field name="function"/>
+                        <field name="profesion_de_legal" />
+                        <field name = "cargo_publico" />
+                        <field name = "nombre_cargo" />
+                        <label for="periodo_cargo_desde"/>
+                        <div class="o_row">
+                            <field name="periodo_cargo_desde" placeholder="Desde"/>
+                            <field name="periodo_cargo_hasta" placeholder="Hasta"/>
+                        </div>
+                    </group>
+
+                    <group string="USO EXCLUSIVO SERVICIOS DIGITALES GÜIP, S.A.">
+                        <field name = "aplica_apertura" />
+                        <field name = "numero_cta_banco" />
+                        <field name = "tipo_cuenta" />
+                        <field name= "datos_instalacion"/>
+                        <field name="aplicativo" />
+                    </group>
+
+                    <group string="&#160;">
+                        <field name="cantidad_dispositivos" />
+                        <field name = "tipo_dispositivo" />
+                        <field name = "usuarios_dispositivos" />
+                        <field name="solicita_sim"/>
+                        <label for="disp_1_latitud"/>
+                        <div class="o_row">
+                            <field name="disp_1_latitud" placeholder="Latitud"/>
+                            <field name="disp_1_longitud" placeholder="Longitud"/>
+                        </div>
+                        <label for="disp_2_latitud"/>
+                        <div class="o_row">
+                            <field name="disp_2_latitud" placeholder="Latitud"/>
+                            <field name="disp_2_longitud" placeholder="Longitud"/>
+                        </div>
+                    </group>
+                </xpath>
+
+                 <notebook>
+                    <page string="Usuarios">
+                        <group colspan="4">
+                                
+                                <field name="user_creacion_ids"
+                                        nolabel="1">
+                                        <tree>
+                                                <field name="name" />
+                                                <field name="user" />
+                                                <field name="tipo_usuario" />
+                                        </tree>
+                                </field>  
+                        </group>
+                    </page>
+
+                    <page string="Información de Socios / Accionistas" attrs="{'invisible': [('tipo_cliente', '=', 'Comerciante_Individual')]}">
+                        <field name="sociedad_dilo_ids" nolabel="1">
+                            <tree string="&#160;Socio / Accionista" editable="bottom">
+                                <field name="name"/>
+                                <field name="id_socio"/>
+                                <field name="porcentaje_socio"/>
+                                <field name="nacionalidad_socio"/>
+                            </tree>
+                        </field>  
+                    </page>
+
+                    <page string="Junta Directiva / Consejo de Administración " attrs="{'invisible': [('tipo_cliente', '=', 'Comerciante_Individual')]}">
+                        <field name="sociedad_dilo_junta_ids" nolabel="1">
+                            <tree string="&#160;Miembro Junta Directiva" editable="bottom">
+                                <field name="name"/>
+                                <field name="id_socio"/>
+                                <field name="cargo"/>
+                                <field name="nacionalidad_socio"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Fotografías">
+                        <group colspan="4">
+                            <field name="id_representante" widget="many2many_binary"/>
+                            <field name="urls_images"/>   
+                        </group>
+                    </page>                     
+                 </notebook>
+
+            </field>
+        </record>
+
+        <!-- </record model="ir.actions.act_window" id="crm_lead_opportunities_view2">
+            <field name="name">flujo.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_opportunities"/>
+            <field name="arch" type="xml">
+
+
+            </field>
+        <record> -->
+
+    </data>
+</odoo>

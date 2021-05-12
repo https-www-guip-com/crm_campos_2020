@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record model='ir.ui.view' id='lista_proveedor_internet_form_view'>
+        <field name="name">lista_proveedor_internet_form</field>
+        <field name="model">lista_proveedor_internet</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                        <group>
+                            <field name="nombre_prove_inter" /> 
+                               
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <record model='ir.ui.view' id='lista_proveedor_internet_tree_view'>
+        <field name="name">lista_proveedor_internet.tree</field>
+        <field name="model">lista_proveedor_internet</field>
+        <field name="arch" type="xml">
+            <tree>
+               <field name="nombre_prove_inter" /> 
+                         
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_123_lista_proveedor_internet" model="ir.actions.act_window">
+        <field name="name">Tipo Proveedor</field>
+        <field name="res_model">lista_proveedor_internet</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+   
+    <menuitem name="Tipo Proveedor" id="menu_tipo_proveedor" 
+              parent="crm.crm_menu_config"
+              action="action_123_lista_proveedor_internet"
+              sequence="6"/>
+    
+    </data>
+</odoo>
